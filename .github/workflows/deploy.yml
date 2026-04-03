@@ -7,19 +7,29 @@ on:
 
 jobs:
   deploy:
+    name: Deploy via FTP
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
-      - run: npm run build
-      - uses: locaweb/ftp-deploy@1.0.0
+
+      - name: Instalar e Build
+        run: |
+          npm install
+          npm run build
+
+      - name: FTP Deploy Locaweb (SamKirkland)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.HOST }} 
-          user: ${{ secrets.USER }}
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "dist"
-          remoteDir: "public_html" 
-          forceSsl: false
+          local-dir: "./dist/"
+          server-dir: "./public_html/"
+          port: 21

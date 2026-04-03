@@ -231,7 +231,7 @@ const Home = () => {
 >
     Tecnologia sob medida para empresas que precisam
     <span style={{ color: COLORS.ACCENT }}>
-        {' '}operar melhor, escalar com controle e crescer com inteligência.
+        {' '}operar melhor, escalar com controle e crescer com inteligência .
     </span>
 </h1>
 
