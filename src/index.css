@@ -1,0 +1,23 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: block; /* O Vite coloca flex aqui, o que centraliza tudo */
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* Esconde o scroll horizontal */
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
