@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. FORÇAR HTTPS (Compatível com Proxy Locaweb)
+  # Evita o erro de "Conexão não segura" e "Site Malicioso"
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. EXCEÇÃO PARA O SISTEMA ST
+  # Impede que as regras do site principal interfiram na subpasta /st
+  RewriteCond %{REQUEST_URI} ^/st/ [NC]
+  RewriteRule ^ - [L]
+
+  # 3. REGRA PARA REACT ROUTER (Single Page Application)
+  # Se o arquivo ou pasta não existir fisicamente, manda para o index.html
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
