@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: 22
 
-      # Passo de build limpo (sem as variáveis do Firebase)
       - name: Instalar e Build
         run: |
           npm install
@@ -32,9 +31,8 @@ jobs:
         uses: locaweb/ftp-deploy@1.0.0
         with:
           host: ${{ secrets.HOST_KHAUA }} 
-          user: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
+          user: ${{ secrets.USER_KHAUA }}
+          password: ${{ secrets.PASS_KHAUA }}
           localDir: "dist"
-          # DESTINO: Raiz da hospedagem para o site khaua.com.br
           remoteDir: "public_html"
-          forceSsl: false # Crucial para funcionar na porta 21 da Locaweb
+          forceSsl: false
